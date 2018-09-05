@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace human
 {
@@ -38,29 +39,25 @@ namespace human
     public class Wizard : Human{
 
         
-        public Wizard(string name, int str, int inte, int dex, int hp) : base(name, str, inte, dex, hp)
+        public Wizard(string name) : base(name)
         {
-            this.intelligence = (inte*3);
+            this.intelligence = 25;
+            this.health = 50;
         }
 
-        public void WizardInfo()
+        public void Heal()
         {
-            Console.WriteLine($"The Wizard's intelligence is {intelligence}");
-            Console.WriteLine($"The Wizard's health is {health}");
-            Console.WriteLine($"The Wizard's name is {name}");
+            this.health = this.health + (10*this.intelligence);
+            Console.WriteLine($"{this.name} heals for {10*this.intelligence}!");
         }
 
-        public new void Attack(Human opponent)
+        public void Fireball(Human opponent)
         {
-            opponent.health = opponent.health - (2*this.intelligence);
-            Console.WriteLine($"{this.name} burns {opponent.name} for "+2*this.intelligence+" damage!");
-            for(int i = 0; i<this.intelligence/3; i++)
-            {
-                opponent.health = opponent.health - this.intelligence;
-                Console.WriteLine($"{opponent.name} is burning!");
-                Console.WriteLine($"{opponent.name} has {opponent.health} hp!");
-                
-            }
+            Random rand = new Random();
+
+            int burn = rand.Next(20,51);
+            opponent.health = opponent.health - (burn);
+            Console.WriteLine($"{this.name} burns {opponent.name} for {burn} damage!");
             if(opponent.health <=0)
             {
                 Console.WriteLine($"{opponent.name} burns to ash!");
@@ -70,40 +67,62 @@ namespace human
 
     public class Samurai : Human
     {
-        public Samurai(string name, int str, int inte, int dex, int hp) : base(name, str, inte, dex, hp)
+
+        static int legion = 0;
+        public Samurai(string name) : base(name)
         {
-            this.strength = (str*3);
-            this.health = (hp*2);
+            Interlocked.Increment(ref legion);
+            this.health = 200;
         }
 
         public new void Attack(Human opponent)
         {
-            opponent.health = opponent.health - (3*this.strength);
-            Console.WriteLine($"{this.name} slices {opponent.name} for "+3*this.strength+" damage!");
+            base.Attack(opponent);
             
+        }
+
+        public void DeathBlow(Human opponent)
+        {
+            if(opponent.health < 50)
+            {
+                opponent.health = 0;
+                Console.WriteLine($"{this.name} demolishes {opponent.name}!");
+            }
+        }
+
+        public void Meditate()
+        {
+            this.health = 200;
+
+            Console.WriteLine($"{this.name} meditates, regaining their energy!");
+        }
+
+        public void HowMany()
+        {
+            Console.WriteLine($"There are {legion} Samurai active!");
         }
     }
 
     public class Ninja : Human
     {
-        public Ninja(string name, int str, int inte, int dex, int hp) : base(name, str, inte, dex, hp)
+        public Ninja(string name) : base(name)
         {
-            this.dexterity = (dex*5);
+            this.dexterity = 175;
         }
 
-        public new void Attack(Human opponent)
+        public void Steal(Human opponent)
         {
-            opponent.health = opponent.health - (this.dexterity/5);
-            Console.WriteLine($"{this.name} slices {opponent.name} for "+this.dexterity/3+" damage!");
+            base.Attack(opponent);
 
-            for(int i = 0; i<this.dexterity; i++)
-            {
-                opponent.health = opponent.health - dexterity/3;
-                Console.WriteLine($"{opponent.name}'s wounds continue to bleed! They take {this.dexterity/3} damage!");
-            }
-            if(opponent.health <=0){
-                Console.WriteLine($"{opponent.name} bleeds out!");
-            }
+            this.health = this.health + 10;
+
+            Console.WriteLine($"{this.name} steals a knick-knack from {opponent.name}!");
+        }
+
+        public void GetAway()
+        {
+            this.health = this.health - 15;
+            Console.WriteLine($"{this.name} tumbles away from the fight!");
         }
     }
 }

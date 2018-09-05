@@ -13,17 +13,17 @@ namespace human
             Challenger.Attack(NewHuman);
             Console.WriteLine($"{NewHuman.name} is down to {NewHuman.health} hp!");
 
-            human.Wizard newWizard = new Wizard("Gandalf", 5, 5, 3, 80);
-
-            newWizard.WizardInfo();
+            human.Wizard newWizard = new Wizard("Gandalf");
 
             newWizard.Attack(Challenger);
 
-            human.Samurai newSamurai = new Samurai("Musashi", 5, 3, 5, 100);
+            human.Samurai newSamurai = new Samurai("Musashi");
 
             newSamurai.Attack(Challenger);
 
-            human.Ninja newNinja = new Ninja("Ryu", 3, 6, 5, 75);
+            newSamurai.HowMany();
+
+            human.Ninja newNinja = new Ninja("Ryu");
 
             newNinja.Attack(Challenger);
         }

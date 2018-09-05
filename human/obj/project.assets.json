@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Cody James\\Documents\\C#\\C# OOP\\human\\human.csproj",
+      "projectUniqueName": "C:\\Users\\Cody James\\Documents\\C#\\C# OOP\\human\\human.csproj",
       "projectName": "human",
-      "projectPath": "c:\\Users\\Cody James\\Documents\\C#\\C# OOP\\human\\human.csproj",
+      "projectPath": "C:\\Users\\Cody James\\Documents\\C#\\C# OOP\\human\\human.csproj",
       "packagesPath": "C:\\Users\\Cody James\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Cody James\\Documents\\C#\\C# OOP\\human\\obj\\",
+      "outputPath": "C:\\Users\\Cody James\\Documents\\C#\\C# OOP\\human\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
